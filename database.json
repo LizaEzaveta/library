@@ -1,0 +1,14 @@
+{
+  "dev": {
+    "host": "localhost",
+    "user": "admin",
+    "password": "12345",
+    "database": "library",
+    "env": "dev",
+    "driver": "mysql",
+    "dateStrings": "true",
+    "multiple-statements": "true"
+  },
+  "sql-file": true
+}
+

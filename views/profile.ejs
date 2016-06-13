@@ -1,0 +1,22 @@
+<% layout('./layout/page') -%>
+<div class="container">
+  <center>
+    <p id="regist_text">Upload book</p>
+    <div class="row">
+      <input type="text" class="form-control regist_input_left" id="usr" placeholder="Book title">
+      <input type="text" class="form-control regist_input_left" id="usr" placeholder="Year of writing">
+    <!-- </div>
+    <div class="row"> -->
+      <input type="text" class="form-control regist_input_left" id="usr" placeholder="Number of pages">
+      <input type="text" class="form-control regist_input_left" id="usr" placeholder="The minimum age of the reader">
+    </div>
+  </center>
+  <input type="file" style="display: none" name="uploadFiles" id="uploadFiles" multiple="multiple"/>
+  <div style="margin-bottom:15px">
+    <button id="addFilesButton" class="btn btn-primary">Add files</button>
+    <button id="uploadAllFilesButton" style="margin-left:5px" class="btn btn-primary">Upload All</button>
+  </div>
+  <table id="files" class="table"></table>
+
+  <button type="submit" id="btn">SUBMIT</button>
+</div>

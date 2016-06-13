@@ -1,0 +1,14 @@
+<% layout('./layout/page') -%>
+<h1>File Uploads
+  <hr/>
+  <input type="file" style="display: none" name="uploadFiles" id="uploadFiles" multiple="multiple"/>
+  <div style="margin-bottom:15px">
+    <button id="addFilesButton" class="btn btn-primary">Add files</button>
+    <button id="uploadAllFilesButton" style="margin-left:5px" class="btn btn-primary">Upload All</button>
+  </div>
+  <div class="progress">
+    <div id="progress" role="progressbar" style="width: 0%" class="progress-bar"></div>
+  </div>
+  <table id="files" class="table"></table>
+</h1>
+<script src="/js/upload.js"></script>

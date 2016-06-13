@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      <%= blocks.title %>
+    </title>
+    <link rel='stylesheet' href='/css/style.css' />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/node_modules/angular/angular.js"></script>
+  </head>
+
+  <body>
+    <div class="container all">
+      <nav class="container">
+        <%- partial('../partials/topNavigation') %>
+      </nav>
+      <section class="container">
+        <%- body -%>
+      </section>
+      <footer class="container">
+        <%- partial('../partials/footer') %>
+      </footer>
+    </div>
+  </body>
+</html>
