@@ -1,22 +1,27 @@
 <% layout('./layout/page') -%>
 <div class="container">
-  <center><p id="regist_text">Registration</p></center>
-  <div class="row">
-    <input type="text" class="form-control input-form regist_input_left" id="usr" placeholder="First name">
-    <input type="text" class="form-control input-form regist_input_left regist_input_right" id="usr" placeholder="Last name">
-  </div>
-  <div class="row">
-    <input type="text" class="form-control input-form regist_input_left" id="usr" placeholder="E-mail">
-    <input type="text" class="form-control input-form regist_input_left regist_input_right" id="usr" placeholder="Phone">
-  </div>
-  <div class="row">
-    <input type="text" class="form-control input-form regist_input_left" id="usr" placeholder="Password">
-    <input type="text" class="form-control input-form regist_input_left regist_input_right" id="usr" placeholder="Confirm password">
-  </div>
-  <button type="submit" id="btn">SUBMIT</button>
-  <ul class="regist">
-    <li><p>Registration with:</p></li>
-    <li id="ggl_1"><a href="/"></a></li>
-    <li id="fb_1"><a href="/"></a></li>
-  </ul>
+  <% if (message.length > 0) { %>
+    <div class="alert alert-danger"><%= message %></div>
+  <% } %>
+  <form method="POST" action="/registration" novalidate="novalidate">
+    <center><p id="regist_text">Registration</p></center>
+    <div class="row">
+      <input name="firstname" type="text" class="form-control input-form regist_input_left" id="usr" placeholder="First name">
+      <input name="secondname" type="text" class="form-control input-form regist_input_left regist_input_right" id="usr" placeholder="Last name">
+    </div>
+    <div class="row">
+      <input name="email" type="text" class="form-control input-form regist_input_left" id="usr" placeholder="E-mail">
+      <input name="tel" type="text" class="form-control input-form regist_input_left regist_input_right" id="usr" placeholder="Phone">
+    </div>
+    <div class="row">
+      <input name="password" type="text" class="form-control input-form regist_input_left" id="usr" placeholder="Password">
+      <input type="text" class="form-control input-form regist_input_left regist_input_right" id="usr" placeholder="Confirm password">
+    </div>
+    <button type="submit" id="btn">SUBMIT</button>
+    <ul class="regist">
+      <li><p>Registration with:</p></li>
+      <a href="/auth/google"><li id="ggl_1"></li></a>
+      <a href="/auth/facebook"><li id="fb_1"></li></a>
+    </ul>
+  </form>
 </div>

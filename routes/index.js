@@ -4,29 +4,15 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var fs = require("fs");
 var multiparty = require('multiparty');
+var checkAuth = require('../middleware/checkAuth');
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
+module.exports = function(app, passport) {
 
-router.get('/upload', function(req, res) {
+app.get('/upload', function(req, res) {
   res.render('upload');
 });
 
-router.post('/upload', function(req, res) {
+app.post('/upload', function(req, res) {
 
 /*  if(req.busboy) {
         req.busboy.on("file", function(fieldName, fileStream, fileName, encoding, mimeType) {
@@ -87,21 +73,93 @@ router.post('/upload', function(req, res) {
   form.parse(req);
 });
 
-router.get('/', function(req, res) {
+app.get('/', function(req, res) {
   res.render('index');
 });
 
-router.get('/library', function(req, res) {
+app.get('/book', function(req, res) {
   res.render('book');
 });
 
-router.get('/login', function(req, res) {
-  res.render('login');
-});
-router.get('/registration', function(req, res) {
-  res.render('registration');
+app.get('/library', function(req, res) {
+  res.render('booklist');
 });
 
-router.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
+app.get('/profile', /*checkAuth,*/ function(req, res) {
+  console.log("to get comes="+JSON.stringify(req.user));
+  /*res.locals.user = req.user;*/
+  res.render('profile', {
+    user : req.user // get the user out of session and pass to template
+  });
+});
 
-module.exports = router;
+app.post('/change_profile', function(req, res) {
+  console.log("res="+req.body.res);
+  /*res.render('profile');*/
+});
+
+app.get('/auth/facebook', passport.authenticate('facebook', { scope:'email'  }));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', {
+    successRedirect: '/profile',
+    failureRedirect: '/'
+  }));
+
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get('/auth/google/callback',
+  passport.authenticate('google', {
+    successRedirect: '/profile',
+    failureRedirect: '/'
+  }));
+
+app.get('/login', function(req, res) {
+  res.render('login', { message: req.flash('loginMessage') });
+});
+
+app.post('/login', passport.authenticate('local-login', {
+    successRedirect: '/profile', // redirect to the secure profile section
+    failureRedirect: '/login', // redirect back to the signup page if there is an error
+    failureFlash: true // allow flash messages
+  }),
+  function(req, res) {
+    console.log("hello");
+
+    if (req.body.remember) {
+      req.session.cookie.maxAge = 1000 * 60 * 3;
+    } else {
+      req.session.cookie.expires = false;
+    }
+    res.redirect('/');
+  }
+);
+
+app.get('/registration', function(req, res) {
+  res.render('registration',  { message: req.flash('signupMessage') });
+});
+
+// process the signup form
+app.post('/registration', passport.authenticate('local-signup', {
+  successRedirect: '/profile', // redirect to the secure profile section
+  failureRedirect: '/registration', // redirect back to the signup page if there is an error
+  failureFlash: true // allow flash messages
+}));
+
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+function isLoggedIn(req, res, next) {
+
+  // if user is authenticated in the session, carry on
+  if (req.isAuthenticated())
+    return next();
+
+  // if they aren't redirect them to the home page
+  res.redirect('/');
+}
+};
+
+/*module.exports = router;*/

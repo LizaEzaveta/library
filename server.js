@@ -10,6 +10,13 @@ var DB = db.DB;
 var BaseRow = db.Row;
 var BaseTable = db.Table;
 var busboy = require("connect-busboy");
+var session = require('express-session');
+var dbconfig = require('./config/database.js');
+
+var passport = require('passport');
+var flash    = require('connect-flash');
+
+require('./config/passport')(passport); // pass passport for configuration
 
 app.engine('ejs', require('ejs-locals'));
 app.use(express.static(path.join(__dirname, 'views')));
@@ -17,17 +24,21 @@ app.set('view engine', 'ejs');
 
 app.use(busboy());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+ } )); // session secret
 
-var lb = mysql.createConnection({
-  host: 'localhost',
-  user: 'admin',
-  password: '12345',
-  database : 'library'
-});
+// Passport:
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
+var lb = mysql.createConnection(dbconfig.connection);
 lb.connect(function (err) {
   if(err){
     console.log('Error connecting to Db');
@@ -61,7 +72,8 @@ lb.end(function(err) {
   console.log('Connection ended');
 });
 
-app.use('/', routes);
+/*app.use('/', routes);*/
+require('./routes/index')(app, passport); 
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');

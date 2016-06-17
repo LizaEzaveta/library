@@ -17,7 +17,7 @@ exports.up = function(db, callback) {
   });*/
 
   db.createTable('author', {
-    id: { type: 'int', primaryKey: true, notNull: true},
+    id: { type: 'int', primaryKey: true, notNull: true,  autoIncrement: true},
     firstname: 'string',
     secondname: 'string',
     biography: 'string'

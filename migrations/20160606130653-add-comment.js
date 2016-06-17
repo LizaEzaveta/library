@@ -32,7 +32,7 @@ exports.up = function(db, callback) {
     onUpdate: 'RESTRICT'
   }, callback);*/
   db.createTable('comment', {
-    id: { type: 'int', primaryKey: true, notNull: true },
+    id: { type: 'int', primaryKey: true, notNull: true,  autoIncrement: true },
     user_id: { type: 'int', notNull: true },
     book_id: { type: 'int', notNull: true },
     /*user_id: {

@@ -194,7 +194,6 @@ a {
   margin-top:23px;
   width: 300px;
   height: 50px;
-  /* padding: 17px 0; */
   font-family: "ArialBold", sans-serif;
   font-size: 24px;
   color: #ffffff;
@@ -271,31 +270,132 @@ a {
   margin: 0;
 }
 
-/*BOOK*/
-/* .book{
-  margin:0 150px;
+/*BOOK LIST*/
+.onebook .book_char li {
+  font-size: 18px;
+}
+
+.onebook img {
+  vertical-align: top !important;
+}
+
+.onebook a:link, .onebook a:visited {
+  text-decoration: none;
+}
+
+/* .onebook a:hover, .onebook a:active {
+  background-color: red;
 } */
 
-.book_char{
+.onebook .book_char li:not(:last-child) {
+  margin-bottom: 7px;
+}
+
+.onebook:not(:last-child) {
+  border-bottom: #848282 solid 1px;
+  padding-bottom: 30px;
+}
+
+.onebook:not(:first-child) {
+  margin-top:30px;
+}
+
+.onebook:first-child {
+  margin-top:23px;
+}
+
+/*BOOK*/
+
+.book {
+  font-family: "SegoeUIRegular", sans-serif;
+}
+
+.book_part, .profile_part {
+  display: inline-block;
+}
+
+.book img {
+  vertical-align: top !important;
+}
+
+.book_part img {
+  margin: 0;
+  padding: 0;
+}
+
+.book_char {
   list-style-type: none;
+  padding-left: 20px;
 }
 
-.book_char li{
-  font-family: "SegoeUIRegular", sans-serif;
-  font-size: 25px;
-  /* margin-bottom:20%; */
+.book_char li:not(:last-child) {
+  margin-bottom: 10px;
 }
 
-.descript_box{
-  margin: 50px 0 0 15px;
-  font-family: "SegoeUIRegular", sans-serif;
-}
-.descript_box b{  
+.book_char li {  
   font-size: 25px;
 }
-.descript_box p{
+
+.descript_box {
+  margin-top: 30px;
+}
+
+.descript_box b {  
+  font-size: 25px;
+}
+
+.descript_box p {
   margin-top: 10px; 
   font-size: 20px;
+}
+
+/*PROFILE*/
+
+.profile_part{
+  vertical-align: top;
+}
+
+/* .profile_part button {
+  background: url("/imgs/edit.png") 0 0;
+  width: 50px;
+  height: 50px;
+} */
+/* .Layer_0 {
+  background-image: url("Layer 0.png");
+  position: absolute;
+  left: 2px;
+  top: 4px;
+  width: 506px;
+  height: 506px;
+  z-index: 1;
+} */
+
+
+.profile_char {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+.profile_char li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.profile_char li, .profile_part {  
+  font-size: 18px;
+}
+
+.profile_char li p{
+  font-stretch: expanded;
+}
+
+.profile_part input{
+  margin:20px 0;
+  width: 510px;
+  height: 50px;
+}
+
+.photo #btn{
+  width: 200px;
 }
 
 /*FONTS */

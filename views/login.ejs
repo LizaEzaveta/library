@@ -1,26 +1,29 @@
 <% layout('./layout/page') -%>
 <div class="container">
-  <form class="login-form" method="POST" action="/login/" novalidate="novalidate">
+  <% if (message.length > 0) { %>
+    <div class="alert alert-danger"><%= message %></div>
+  <% } %>
+  <form class="login-form" method="POST" action="/login" novalidate="novalidate">
     <div class="login-header">
       <center><p id="regist_text">Login</p></center>
     </div>
     <div class="panel-body login-content">
       <div class="form-group">
         <label for="username" class="control-label">Email</label>
-        <input type="text" class="form-control input-form" id="username" name="username" value="" required="" title="Email" placeholder="example@gmail.com">
+        <input name="email" type="text" class="form-control input-form" id="username" name="username" value="" required="" title="Email" placeholder="example@gmail.com">
       </div>
       <div class="form-group">
         <label for="password" class="control-label">Password</label>
-        <input type="password" class="form-control input-form" id="password" name="password" value="" required="" title="Password">
-      </div>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name="remember" id="remember"> Remember login
-        </label>
-      </div>    
+        <input name="password" type="password" class="form-control input-form" id="password" name="password" value="" required="" title="Password">
+      </div>   
       <div class="login-footer">
         <button type="submit" id="btn">Login</button>
       </div>
+      <ul class="regist">
+        <li><p>Login with:</p></li>
+        <li id="ggl_1"><a href="/"></a></li>
+        <li id="fb_1"><a href="/"></a></li>
+      </ul> 
       <center id="login-txt">
         <p class="message">Not registered? <a href="/registration">Create an account</a></p>
       </center>

@@ -1,22 +1,140 @@
 <% layout('./layout/page') -%>
 <div class="container">
-  <center>
-    <p id="regist_text">Upload book</p>
-    <div class="row">
-      <input type="text" class="form-control regist_input_left" id="usr" placeholder="Book title">
-      <input type="text" class="form-control regist_input_left" id="usr" placeholder="Year of writing">
-    <!-- </div>
-    <div class="row"> -->
-      <input type="text" class="form-control regist_input_left" id="usr" placeholder="Number of pages">
-      <input type="text" class="form-control regist_input_left" id="usr" placeholder="The minimum age of the reader">
+  <div class="profile">
+  <div class="row">
+  <div class="col-md-6">
+    <form action="/change_profile" method="POST">
+      <div class="profile_part photo">
+        <img src="/imgs/profiles/prof1.png" width="200px"><br>
+        <button type="submit" id="btn">Upload</button>
+      </div>
+      <div class="profile_part">
+        <ul class="profile_char">
+        <li>
+          <b>ID:</b><br>
+          <p id="profile_info" contenteditable="true"><%= user.id %>
+            <img src="/imgs/edit.png" width="20px" id="butn">
+          </p>
+        </li>
+        <li>
+          <b>First name:</b><br>
+          <p id="profile_info" contenteditable="true"><%= user.firstname %>
+            <img src="/imgs/edit.png" width="20px" id="butn">
+          </p>
+        </li>
+        <li>
+          <b>Second name:</b><br>
+          <p id="profile_info" contenteditable="true"><%= user.secondname %>
+            <img src="/imgs/edit.png" width="20px" id="butn">
+          </p>
+        </li>
+        <li>
+          <b>Telephone number:</b><br>
+          <p id="profile_info" contenteditable="true"><%= user.tel %>
+            <img src="/imgs/edit.png" width="20px" id="butn">
+          </p>
+        </li>
+        <li>
+          <b>Age:</b><br>
+          <p id="profile_info" contenteditable="true"><%= user.age %>
+            <img src="/imgs/edit.png" width="20px" id="butn">
+          </p>
+        </li>
+        <li>
+          <b>Email:</b><br>
+          <p id="profile_info" contenteditable="true"><%= user.email %>
+            <img src="/imgs/edit.png" width="20px" id="butn">
+          </p>
+        </li>
+        <li>
+          <b>Password:</b><br>
+          <button class="btn btn-primary">Change password</button>
+        </li>
+      </ul>
+      <button type="submit" id="btn">SUBMIT</button>
+        <!-- <div class="form-group">
+          <label for="username" class="control-label">First name</label>
+          <input type="text" class="form-control input-form" id="username" name="username" value="" required="" title="Email" placeholder="example@gmail.com">
+        </div>
+        <div class="form-group">
+          <label for="username" class="control-label">Second name</label>
+          <input type="text" class="form-control input-form" id="username" name="username" value="" required="" title="Email" placeholder="example@gmail.com">
+        </div>
+        <div class="form-group">
+          <label for="username" class="control-label">Telephone number</label>
+          <input type="text" class="form-control input-form" id="username" name="username" value="" required="" title="Email" placeholder="example@gmail.com">
+        </div>
+        <div class="form-group">
+          <label for="username" class="control-label">Age</label>
+          <input type="text" class="form-control input-form" id="username" name="username" value="" required="" title="Email" placeholder="example@gmail.com">
+        </div>
+        <div class="form-group">
+          <label for="username" class="control-label">Email</label>
+          <input type="text" class="form-control input-form" id="username" name="username" value="" required="" title="Email" placeholder="example@gmail.com">
+        </div>
+        <div class="form-group">
+          <label for="username" class="control-label">Password</label>
+          <input type="text" class="form-control input-form" id="username" name="username" value="" required="" title="Email" placeholder="example@gmail.com">
+        </div>
+        <div class="form-group">
+          <label for="username" class="control-label">Confirm password</label>
+          <input type="text" class="form-control input-form" id="username" name="username" value="" required="" title="Email" placeholder="example@gmail.com">
+        </div> -->
+      </div>
+    </form>
     </div>
-  </center>
-  <input type="file" style="display: none" name="uploadFiles" id="uploadFiles" multiple="multiple"/>
-  <div style="margin-bottom:15px">
-    <button id="addFilesButton" class="btn btn-primary">Add files</button>
-    <button id="uploadAllFilesButton" style="margin-left:5px" class="btn btn-primary">Upload All</button>
+    <div class="col-md-6">
+    <div class="profile_part">
+      <b>Upload book</b>
+      <input type="text" class="form-control upload_input" id="usr" placeholder="Book title">
+      <input type="text" class="form-control upload_input" id="usr" placeholder="Year of writing">
+      <input type="text" class="form-control upload_input" id="usr" placeholder="Number of pages">
+      <input type="text" class="form-control upload_input" id="usr" placeholder="The minimum age of the reader">
+      <input type="file" style="display: none" name="uploadFiles" id="uploadFiles" multiple="multiple" />
+      <div style="margin-bottom:15px">
+        <button id="addFilesButton" class="btn btn-primary">Add files</button>
+      </div>
+      <table id="files" class="table"></table>
+      <!-- <button type="submit" id="btn">SUBMIT</button> -->
+    </div>
+    </div>
   </div>
-  <table id="files" class="table"></table>
-
-  <button type="submit" id="btn">SUBMIT</button>
+  </div>
 </div>
+<script type="text/javascript">
+/*document.getElementById('profile_info').onclick = function() {
+    document.body.removeChild(this);
+    var input = document.createElement('input');
+    input.id = 'test';
+    input.value = this.innerHTML;
+    input.name = "res";
+    document.body.appendChild(input);
+    input.select();
+}*/
+$( "div.second" ).replaceWith( "<h2>New heading</h2>" );
+/*  window.onload = function() {
+  var spans = document.getElementsById("profile_info"),
+      index,
+      span;
+
+  for (index = 0; index < spans.length; ++index) {
+    span = spans[index];
+    if (span.contentEditable) {
+      span.onblur = function() {
+        var text = this.innerHTML;
+        text = text.replace(/&/g, "&amp").replace(/</g, "&lt;");
+        display("Content committed, span " +
+                (this.id || "anonymous") +
+                ": '" +
+                text + "'");
+      };
+    }
+  }
+
+  function display(msg) {
+    var p = document.createElement('p');
+    p.innerHTML = msg;
+    document.body.appendChild(p);
+  }*/
+};
+</script>
